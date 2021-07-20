@@ -11,12 +11,14 @@ function App() {
   return (
     <Router>
       <MainNavigation />
-      <Switch>
-        <Route path="/">
-          <Home />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <main>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </main>
     </Router>
   );
 }
