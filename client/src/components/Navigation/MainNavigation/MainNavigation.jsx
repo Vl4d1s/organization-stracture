@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import MainHeader from "./MainHeader/MainHeader";
+import NavLinks from "../NavLinks/NavLinks";
 import "./MainNavigation.css";
 
 const MainNavigation = () => {
@@ -14,7 +15,9 @@ const MainNavigation = () => {
       <h1 className="main-navigation__title">
         <Link>Organization Stracture</Link>
       </h1>
-      <nav>...</nav>
+      <nav>
+        <NavLinks />
+      </nav>
     </MainHeader>
   );
 };
