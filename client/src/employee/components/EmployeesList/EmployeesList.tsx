@@ -9,46 +9,14 @@ export interface EmployeeData {
   description: string;
   manager: string;
   position: string;
+  id: string;
 }
 
-const cards: EmployeeData[] = [
-  {
-    date: "2013",
-    fistName: "Helen",
-    lastName: "Markin",
-    description: "Primary Contact",
-    manager: "Alex Kreinis",
-    position: "Full stack developer",
-  },
-  {
-    date: "2013",
-    fistName: "Matthew",
-    lastName: "Markin",
-    description: "Primary Contact",
-    manager: "Alex Kreinis",
-    position: "Full stack developer",
-  },
-  {
-    date: "2013",
-    fistName: "Molly",
-    lastName: "Markin",
-    description: "Primary Contact",
-    manager: "Alex Kreinis",
-    position: "Full stack developer",
-  },
-  {
-    date: "2013",
-    fistName: "Molly",
-    lastName: "Markin",
-    description: "Primary Contact",
-    manager: "Alex Kreinis",
-    position: "Full stack developer",
-  },
-];
-
-const EmployeesList = (): JSX.Element => {
-  const renderedCards: JSX.Element[] = cards.map((card) => {
-    return <EmployeeItem employee={card} />;
+const EmployeesList: React.FC<{ employees: EmployeeData[] }> = (
+  props
+): JSX.Element => {
+  const renderedCards: JSX.Element[] = props.employees.map((employee) => {
+    return <EmployeeItem employee={employee} />;
   });
 
   return (
