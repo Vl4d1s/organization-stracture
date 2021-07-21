@@ -17,14 +17,13 @@
 
 .nav-links a {
   border: 1px solid transparent;
-  color: #292929;
+  color: #ffffff;
   text-decoration: none;
   padding: 0.5rem;
 }
 
 .nav-links a:hover {
-  background: #017c2a83;
-  border-color: #292929;
+  border-color: #ffffff;
 }
 
 @media (min-width: 768px) {
