@@ -10,20 +10,20 @@ import "./MainNavigation.css";
 const MainNavigation = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(false);
 
-  const openDrawer = (): void => {
+  const openDrawerHandler = (): void => {
     setDrawerIsOpen(true);
   };
-  const closeDrawer = (): void => {
+  const closeDrawerHandler = (): void => {
     setDrawerIsOpen(false);
   };
 
   return (
     <React.Fragment>
-      {drawerIsOpen && <Backdrop onClick={closeDrawer} />}
+      {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
       <SideDrawer
         show={drawerIsOpen}
         timeout={200}
-        onSideDraweClick={closeDrawer}
+        onSideDraweClick={closeDrawerHandler}
       >
         <nav className="main-navigation__drawer-nav">
           <NavLinks />
@@ -31,7 +31,10 @@ const MainNavigation = () => {
       </SideDrawer>
 
       <MainHeader>
-        <button onClick={openDrawer} className="main-navigation__menu-btn">
+        <button
+          onClick={openDrawerHandler}
+          className="main-navigation__menu-btn"
+        >
           <span />
           <span />
           <span />

@@ -4,8 +4,8 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import MainNavigation from "./components/Navigation/MainNavigation/MainNavigation";
+import Employee from "./Employee/pages/Employee/Employees";
+import MainNavigation from "./shared/components/Navigation/MainNavigation/MainNavigation";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <main>
         <Switch>
           <Route path="/">
-            <Home />
+            <Employee />
           </Route>
           <Redirect to="/" />
         </Switch>
