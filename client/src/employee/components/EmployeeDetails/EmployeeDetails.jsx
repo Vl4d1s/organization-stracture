@@ -1,9 +1,10 @@
 import React from "react";
-import { Image, Header, Divider, Grid, Icon, Button } from "semantic-ui-react";
+import { Image, Header, Divider, Grid, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 import Social from "../Social/Social";
 import SegmentCard from "../../../shared/components/UIElements/SegmentCard/SegmentCard";
+import ReportModal from "../../../shared/components/UIElements/Modals/ReportModal";
 
 import defaultImage from "../../../assets/defaultImage.png";
 
@@ -26,9 +27,10 @@ const Details = (props) => {
                 <Icon name="user" />
                 Manager: {manager}
               </Link>
-              <Button floated="right" basic color="blue" content="Blue">
+              <ReportModal />
+              {/* <Button floated="right" basic color="blue" content="Blue">
                 Report
-              </Button>
+              </Button> */}
             </Grid.Column>
           </Grid.Row>
         </Grid>
