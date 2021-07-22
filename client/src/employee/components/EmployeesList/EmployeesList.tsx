@@ -15,9 +15,11 @@ export interface EmployeeData {
 const EmployeesList: React.FC<{ employees: EmployeeData[] }> = (
   props
 ): JSX.Element => {
-  const renderedCards: JSX.Element[] = props.employees.map((employee) => {
-    return <EmployeeItem employee={employee} />;
-  });
+  const renderedCards: JSX.Element[] = props.employees.map(
+    (employee, index) => {
+      return <EmployeeItem key={index} employee={employee} />;
+    }
+  );
 
   return (
     <Container>

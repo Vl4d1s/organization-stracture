@@ -17,7 +17,7 @@ const NavLinks: React.FC = () => {
 
   const renderedLinks: JSX.Element[] = links.map((link) => {
     return (
-      <li>
+      <li key={link.pageName}>
         <NavLink to={link.path}>{link.pageName}</NavLink>
       </li>
     );
