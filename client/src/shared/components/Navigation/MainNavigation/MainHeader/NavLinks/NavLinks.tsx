@@ -11,7 +11,11 @@ const NavLinks: React.FC = () => {
   const links: link[] = [
     {
       path: "/",
-      pageName: "Employee",
+      pageName: "EMPLOYEES",
+    },
+    {
+      path: "/login",
+      pageName: "LOGIN",
     },
   ];
 

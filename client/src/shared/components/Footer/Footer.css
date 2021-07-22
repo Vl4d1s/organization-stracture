@@ -1,0 +1,20 @@
+.main-footer {
+  color: white;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
+  font-family: "Arvo", sans-serif;
+}
+
+.main-footer p {
+  margin: 0;
+  text-align: center;
+}
+
+.main-footer a {
+  color: #ffffff;
+}
