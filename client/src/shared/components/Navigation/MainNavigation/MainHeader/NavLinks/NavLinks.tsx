@@ -17,6 +17,10 @@ const NavLinks: React.FC = () => {
       path: "/login",
       pageName: "LOGIN",
     },
+    {
+      path: "/register",
+      pageName: "REGISTER",
+    },
   ];
 
   const renderedLinks: JSX.Element[] = links.map((link) => {

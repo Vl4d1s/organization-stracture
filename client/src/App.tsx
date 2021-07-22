@@ -10,6 +10,7 @@ import Employee from "./employee/pages/Employees/Employees";
 import EmployeeInfo from "./employee/pages/EmployeeInfo/EmployeeInfo";
 import MainNavigation from "./shared/components/Navigation/MainNavigation/MainNavigation";
 import Login from "./employee/pages/Login/Login";
+import Register from "./employee/pages/Register/Register";
 import Footer from "./shared/components/Footer/Footer";
 import store from "./store";
 import "./App.css";
@@ -29,6 +30,9 @@ const App = () => (
             </Route>
             <Route path="/login" exact>
               <Login />
+            </Route>
+            <Route path="/register" exact>
+              <Register />
             </Route>
             <Redirect to="/" />
           </Switch>
