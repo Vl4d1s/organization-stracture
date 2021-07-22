@@ -7,9 +7,12 @@ import {
 import Employee from "./employee/pages/Employees/Employees";
 import EmployeeDetails from "./employee/pages/EmployeeDetails/EmployeeDetails";
 import MainNavigation from "./shared/components/Navigation/MainNavigation/MainNavigation";
+// Redux
+import { Provider } from "react-redux";
+import store from "./store";
 
-function App() {
-  return (
+const App = () => (
+  <Provider store={store}>
     <Router>
       <MainNavigation />
       <main>
@@ -24,7 +27,7 @@ function App() {
         </Switch>
       </main>
     </Router>
-  );
-}
+  </Provider>
+);
 
 export default App;
