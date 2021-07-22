@@ -1,5 +1,6 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Form,
   Input,
@@ -7,6 +8,7 @@ import {
   Select,
   Segment,
   Container,
+  Message,
 } from "semantic-ui-react";
 import { register } from "../../../actions/auth";
 
@@ -75,6 +77,9 @@ const Register = () => {
             type="submit"
           />
         </Form>
+        <Message>
+          Allredy have account? <Link to="login">Login</Link>
+        </Message>
       </Segment>
     </Container>
   );

@@ -6,6 +6,7 @@ import {
   Segment,
   Container,
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -32,7 +33,9 @@ const Login = () => {
           </Grid.Column>
 
           <Grid.Column verticalAlign="middle">
-            <Button content="Sign up" icon="signup" size="big" />
+            <Link to="/register">
+              <Button content="Sign up" icon="signup" size="big" to="/" />
+            </Link>
           </Grid.Column>
         </Grid>
 
