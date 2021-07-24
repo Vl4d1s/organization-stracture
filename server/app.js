@@ -3,13 +3,28 @@ const bodyParser = require("body-parser");
 
 const connetctDB = require("./config/db");
 const HttpError = require("./models/http-error");
-const usersRoute = require("./routes/users");
-const authRoute = require("./routes/auth");
+const usersRoute = require("./routes/users-routes");
+const authRoute = require("./routes/auth-routes");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(bodyParser.json());
+
+// Handling CORS Errors. Attached headers to every response
+app.use((req, res, next) => {
+  // Allows to any domain to send request.
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // Controls wich headers allowed.
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  // Controls wich HTTP Methods allowed.
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+
+  next();
+});
 
 app.get("/", (req, res) => {
   res.status(200).send("API Running");
