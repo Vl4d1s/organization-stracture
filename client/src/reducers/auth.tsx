@@ -17,7 +17,6 @@ const authReducer = (
   action: { type: string; payload: { token: string } }
 ) => {
   const { type, payload } = action;
-
   switch (type) {
     case REGISTER_SUCCESS:
       localStorage.setItem("token", payload.token);

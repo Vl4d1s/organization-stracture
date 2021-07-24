@@ -13,6 +13,8 @@ import Login from "./employee/pages/Login/Login";
 import Register from "./employee/pages/Register/Register";
 import Footer from "./shared/components/Footer/Footer";
 import store from "./store";
+import Alert from "./shared/components/UIElements/Alert/Alert";
+
 import "./App.css";
 
 const App = () => (
@@ -36,6 +38,7 @@ const App = () => (
             </Route>
             <Redirect to="/" />
           </Switch>
+          <Alert />
         </main>
         <Footer />
       </div>

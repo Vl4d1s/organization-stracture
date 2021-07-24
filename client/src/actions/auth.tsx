@@ -1,21 +1,19 @@
 import axios from "axios";
 import { REGISTER_SUCCESS, REGISTER_FAIL } from "./types";
 
-const ipAddress = "http://127.0.0.1:3000";
+const ipAddress = "http://127.0.0.1:5000";
 
 export interface bodyType {
-  name: string;
   email: string;
   password: string;
 }
 // Register User
 export const register =
-  ({ name, email, password }: bodyType) =>
+  ({ email, password }: bodyType) =>
   async (dispatch: any) => {
-    const body: bodyType = { name, email, password };
+    const body: bodyType = { email, password };
     try {
-      const res = await axios.post(`${ipAddress}/api/auth/login`, body);
-
+      const res = await axios.post(`${ipAddress}/api/users/signup`, body);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
