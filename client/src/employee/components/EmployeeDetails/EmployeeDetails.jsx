@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Social from "../Social/Social";
 import SegmentCard from "../../../shared/components/UIElements/SegmentCard/SegmentCard";
 import ReportModal from "../../../shared/components/UIElements/Modals/ReportModal";
-
 import defaultImage from "../../../assets/defaultImage.png";
 
 const Details = (props) => {

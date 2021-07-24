@@ -10,7 +10,7 @@ function ReportModal() {
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
-        <Button floated="right" basic color="blue" content="Blue">
+        <Button floated="right" basic color="blue">
           Report
         </Button>
       }
@@ -25,16 +25,12 @@ function ReportModal() {
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button icon="cancel" color="red" onClick={() => setOpen(false)}>
+        <Button color="red" onClick={() => setOpen(false)}>
           Cancel
         </Button>
-        <Button
-          content="Save"
-          labelPosition="right"
-          icon="checkmark"
-          onClick={() => setOpen(false)}
-          positive
-        />
+        <Button color="green" onClick={() => setOpen(false)}>
+          Save
+        </Button>
       </Modal.Actions>
     </Modal>
   );

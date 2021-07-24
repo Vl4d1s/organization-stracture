@@ -4,7 +4,7 @@ import { Card, Button, Icon } from "semantic-ui-react";
 
 import { EmployeeData } from "../../EmployeesList";
 
-const extra = (manager: string, id: string): JSX.Element => {
+const extra = (manager: string, id: string) => {
   return (
     <React.Fragment>
       <Link to="/">

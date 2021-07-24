@@ -1,17 +1,16 @@
 import { List } from "semantic-ui-react";
 import TasksModal from "../../../../shared/components/UIElements/Modals/TasksModal";
 
-const EmployeeTasksItem = () => {
+const EmployeeTasksItem = (props) => {
+  const { title, header, description, assignDate, dueDate } = props.taskList;
+
   return (
     <List.Item>
       <List.Icon loading name="spinner" verticalAlign="middle" />
       <List.Content>
-        <TasksModal
-          title="Installing redux"
-          description="task description..."
-        />
+        <TasksModal title={title} header={header} description={description} />
         <List.Description as="a">
-          Assign date: 10/10/2021 Due: 10/10/2022
+          Assign date: {assignDate} Due: {dueDate}
         </List.Description>
       </List.Content>
     </List.Item>
