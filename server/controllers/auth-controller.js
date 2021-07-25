@@ -6,7 +6,6 @@ const getUser = async (req, res, next) => {
     const existingUser = await User.findById(req.userData.userId).select(
       "-password"
     );
-    console.log(existingUser);
     res.json(existingUser);
   } catch (err) {
     const error = new HttpError("Server Error.", 500);

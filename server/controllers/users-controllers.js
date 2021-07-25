@@ -6,20 +6,18 @@ const config = require("config");
 const HttpError = require("../models/http-error");
 const User = require("../models/User");
 const jwtSecret = config.get("jwtSecret");
-const saltNumber = 12;
+const saltNumber = 10;
 const jwtexpireTime = "1h";
 
 const signup = async (req, res, next) => {
-  console.log("sign up controller");
   // Check for errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { email, password } = req.body;
+  const { firstName, lastName, role, position, email, password } = req.body;
   let existingUser;
-  console.log("sign up controller2", req.body);
 
   // See if user exists
   try {
@@ -57,6 +55,10 @@ const signup = async (req, res, next) => {
     createdUser = new User({
       email,
       password: hashedPassword,
+      firstName,
+      lastName,
+      role,
+      position,
     });
   } catch (err) {
     const error = new HttpError(
@@ -148,8 +150,8 @@ const login = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      jwtexpireTime,
-      { expiresIn: "1h" }
+      jwtSecret,
+      { expiresIn: jwtexpireTime }
     );
   } catch (err) {
     const error = new HttpError(

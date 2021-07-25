@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 
 const connetctDB = require("./config/db");
 const HttpError = require("./models/http-error");
-const usersRoute = require("./routes/users-routes");
-const authRoute = require("./routes/auth-routes");
+const usersRoute = require("./routes/api/users-routes");
+const authRoute = require("./routes/api/auth-routes");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -16,7 +16,10 @@ app.use((req, res, next) => {
   // Allows to any domain to send request.
   res.setHeader("Access-Control-Allow-Origin", "*");
   // Controls wich headers allowed.
-  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, x-auth-token"
+  );
   // Controls wich HTTP Methods allowed.
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
 

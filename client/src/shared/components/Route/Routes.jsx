@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import EmployeeInfo from "../../../employee/pages/EmployeeInfo/EmployeeInfo";
 import Login from "../../../employee/pages/Login/Login";
@@ -10,10 +10,13 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/login" render={() => <Login />} />
-      <Route exact path="/register" render={() => <Register />} />
-      <PrivateRoutes exact path="/" component={EmployeeInfo} />
-      <PrivateRoutes exact path="/profile" component={EmployeeInfo} />
-      <PrivateRoutes exact path="/employees" component={Employees} />
+      <Route path="/register" render={() => <Register />} />
+      {/* <PrivateRoutes  path="/" component={EmployeeInfo} /> */}
+      <PrivateRoutes path="/profile" component={EmployeeInfo} />
+      <PrivateRoutes path="/employees" component={Employees} />
+      <Route path="*">
+        <Redirect to="/profile" />
+      </Route>
     </Switch>
   );
 };

@@ -1,10 +1,15 @@
 import { SET_ALERT, REMOVE_ALERT } from "../actions/types";
 
-const initialState: any = [];
+export interface IPayload {
+  msg: string;
+  id: string;
+}
+
+const initialState: any[] = [];
 
 const alertReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: { type: string; payload: string }
 ) => {
   const { type, payload } = action;
 
@@ -12,7 +17,7 @@ const alertReducer = (
     case SET_ALERT:
       return [...state, payload];
     case REMOVE_ALERT:
-      return state.filter((alert: { id: any }) => alert.id !== payload);
+      return state.filter((alert: { id: string }) => alert.id !== payload);
     default:
       return state;
   }

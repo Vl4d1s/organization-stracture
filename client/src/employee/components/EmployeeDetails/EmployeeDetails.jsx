@@ -8,6 +8,8 @@ import ReportModal from "../../../shared/components/UIElements/Modals/ReportModa
 import defaultImage from "../../../assets/defaultImage.png";
 
 const Details = (props) => {
+  const { firstName, lastName, position, role, manager } = props.userDetails;
+
   return (
     <React.Fragment>
       <SegmentCard title="Details">
@@ -17,15 +19,17 @@ const Details = (props) => {
               <Image src={defaultImage} size="small" floated="left" />
             </Grid.Column>
             <Grid.Column width={12}>
-              <Header as="h3">Name: </Header>
-              <Header as="h4">Position:</Header>
+              <Header as="h3">Name: {`${firstName} ${lastName}`}</Header>
+              <Header as="h4">Position: {position}</Header>
               <Social />
               <Divider />
-              <Link to="/">
-                <Icon name="user" />
-                Manager:
-              </Link>
-              <ReportModal />
+              {role !== "manager" && (
+                <Link to="/">
+                  <Icon name="user" />
+                  Manager: {manager}
+                </Link>
+              )}
+              {role !== "manager" && <ReportModal />}
             </Grid.Column>
           </Grid.Row>
         </Grid>

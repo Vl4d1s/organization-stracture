@@ -15,15 +15,7 @@ import { register } from "../../../actions/auth";
 import { setAlert } from "../../../actions/alert";
 
 const Register = (props: any) => {
-  const [formData, setFormData] = useState<{
-    email: string;
-    password: string;
-    password2: string;
-    firstName: string;
-    lastName: string;
-    role: string;
-    position: string;
-  }>({
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     position: "",
@@ -36,7 +28,7 @@ const Register = (props: any) => {
   const { firstName, lastName, position, role, email, password, password2 } =
     formData;
 
-  const onInputChange = (e: { target: { name: any; value: any } }) => {
+  const onInputChange = (e: { target: { name: string; value: string } }) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -47,7 +39,6 @@ const Register = (props: any) => {
     if (password !== password2) {
       props.setAlert("Password do not match", "danger");
     } else {
-      console.log(formData);
       await props.register({
         firstName,
         lastName,

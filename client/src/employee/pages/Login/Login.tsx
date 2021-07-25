@@ -1,23 +1,26 @@
 import { useState } from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../../actions/auth";
 
-const Login = (props: any) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export interface LoginProps {
+  isAuthenticated: boolean;
+  login: (email: string, password: string) => void;
+}
 
-  const history = useHistory();
+const Login: React.FC<LoginProps> = ({ login, isAuthenticated }) => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const onSubmitHandler = async (e: any) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    props.login(email, password);
-
-    if (props.isAuthenticated) {
-      history.replace("/profile");
-    }
+    login(email, password);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="profile" />;
+  }
 
   return (
     <Grid textAlign="center" style={{ height: "70vh" }} verticalAlign="middle">

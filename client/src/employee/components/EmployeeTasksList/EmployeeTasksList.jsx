@@ -1,6 +1,5 @@
 import React from "react";
 import { List } from "semantic-ui-react";
-// import { Link } from "react-router-dom";
 import SegmentCard from "../../../shared/components/UIElements/SegmentCard/SegmentCard";
 import EmployeeTasksItem from "./EmployeeTasksItem/EmployeeTasksItem";
 
@@ -21,10 +20,14 @@ const DUMMY_TASK_LIST = [
   },
 ];
 
-const EmployeeTasksList = () => {
+const EmployeeTasksList = (props) => {
+  const { firstName, role } = props.userDetails;
+
   return (
     <React.Fragment>
-      <SegmentCard title={`Vladis's tasks`}>
+      <SegmentCard
+        title={`${firstName}'s ${role === "manager" ? "Reports" : "Tasks"}`}
+      >
         <List divided relaxed>
           {DUMMY_TASK_LIST.map((task) => {
             return <EmployeeTasksItem taskList={task} />;

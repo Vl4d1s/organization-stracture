@@ -5,6 +5,7 @@ import { logout } from "../../../../../../actions/auth";
 import "./NavLinks.css";
 
 const NavLinks: React.FC = (props: any) => {
+  console.log();
   // const authLinks = ();
   // const guestLinks = ();
 
@@ -14,7 +15,7 @@ const NavLinks: React.FC = (props: any) => {
     onClick?: () => void;
   }
 
-  const authLinks: link[] = [
+  const managerLinks: link[] = [
     {
       path: "/profile",
       pageName: "PROFILE",
@@ -29,6 +30,17 @@ const NavLinks: React.FC = (props: any) => {
     },
   ];
 
+  const employeeLinks: link[] = [
+    {
+      path: "/profile",
+      pageName: "PROFILE",
+    },
+    {
+      path: "/login",
+      pageName: "LOGOUT",
+    },
+  ];
+
   const guestLinks: link[] = [
     {
       path: "/login",
@@ -36,7 +48,19 @@ const NavLinks: React.FC = (props: any) => {
     },
   ];
 
-  const renderedAuthLinks: JSX.Element[] = authLinks.map((link) => {
+  const renderedManagerLinks: JSX.Element[] = managerLinks.map((link) => {
+    return link.pageName === "LOGOUT" ? (
+      <li key={link.pageName} onClick={props.logout}>
+        <NavLink to={link.path}>{link.pageName}</NavLink>
+      </li>
+    ) : (
+      <li key={link.pageName}>
+        <NavLink to={link.path}>{link.pageName}</NavLink>
+      </li>
+    );
+  });
+
+  const renderedEmployeeLinks: JSX.Element[] = employeeLinks.map((link) => {
     return link.pageName === "LOGOUT" ? (
       <li key={link.pageName} onClick={props.logout}>
         <NavLink to={link.path}>{link.pageName}</NavLink>
@@ -60,7 +84,12 @@ const NavLinks: React.FC = (props: any) => {
 
   return (
     <ul className="nav-links">
-      {!loading && (isAuthenticated ? renderedAuthLinks : renderedGuesLinks)}
+      {!loading &&
+        (isAuthenticated
+          ? props.auth.user?.role === "manager"
+            ? renderedManagerLinks
+            : renderedEmployeeLinks
+          : renderedGuesLinks)}
     </ul>
   );
 };

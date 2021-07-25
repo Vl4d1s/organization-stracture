@@ -6,7 +6,6 @@ const Alert = ({ alerts }) =>
   alerts.length > 0 &&
   alerts.map((alert) => (
     <Container>
-      {" "}
       <Message key={alert.id} negative>
         <Message.Header>{alert.msg}</Message.Header>
       </Message>

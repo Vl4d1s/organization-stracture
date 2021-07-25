@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -9,12 +10,12 @@ import {
   LOGOUT,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
+import { userDetails } from "../employee/pages/EmployeeInfo/EmployeeInfo";
 import { setAlert } from "./alert";
-import { type } from "os";
 
 const ipAddress = "http://127.0.0.1:5000";
 
-export interface bodyType {
+export interface IUser {
   firstName: string;
   lastName: string;
   role: string;
@@ -31,7 +32,9 @@ export const loadUser = () => async (dispatch: any) => {
   try {
     const res = await axios.get(`${ipAddress}/api/auth/`);
 
-    dispatch({ type: USER_LOADED, payload: res.data });
+    const payload: userDetails = res.data;
+
+    dispatch({ type: USER_LOADED, payload });
   } catch (err) {
     dispatch({ type: AUTH_ERROR });
   }
@@ -39,9 +42,9 @@ export const loadUser = () => async (dispatch: any) => {
 
 // Register User
 export const register =
-  ({ firstName, lastName, position, role, email, password }: bodyType) =>
+  ({ firstName, lastName, position, role, email, password }: IUser) =>
   async (dispatch: any) => {
-    const body: bodyType = {
+    const body: IUser = {
       firstName,
       lastName,
       position,
@@ -60,7 +63,9 @@ export const register =
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach((error: { msg: any }) => dispatch(setAlert(error.msg)));
+        errors.forEach((error: { msg: string }) =>
+          dispatch(setAlert(error.msg))
+        );
       }
 
       dispatch({
@@ -70,26 +75,30 @@ export const register =
   };
 
 // Login User
-export const login = (email: any, password: any) => async (dispatch: any) => {
-  try {
-    const body = { email, password };
-    const res = await axios.post(`${ipAddress}/api/users/login`, body);
+export const login =
+  (email: string, password: string) => async (dispatch: any) => {
+    try {
+      const body = { email, password };
+      const res = await axios.post(`${ipAddress}/api/users/login`, body);
 
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
-    });
-    dispatch(loadUser());
-  } catch (err) {
-    // const errors = err.response.data.errors;
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
 
-    // if (errors) {
-    //   errors.forEach((error: { msg: any }) => dispatch(setAlert(error.msg)));
-    // }
+      dispatch(loadUser());
+    } catch (err) {
+      const errors = err.response.data.errors;
 
-    dispatch({ type: LOGIN_FAIL });
-  }
-};
+      if (errors) {
+        errors.forEach((error: { msg: string }) =>
+          dispatch(setAlert(error.msg))
+        );
+      }
+
+      dispatch({ type: LOGIN_FAIL });
+    }
+  };
 
 // Logout User
 export const logout = () => (dispatch: any) => {
