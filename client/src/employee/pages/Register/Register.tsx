@@ -5,7 +5,6 @@ import {
   Form,
   Input,
   Button,
-  Select,
   Segment,
   Grid,
   Message,
@@ -15,23 +14,27 @@ import {
 import { register } from "../../../actions/auth";
 import { setAlert } from "../../../actions/alert";
 
-const managerOptions = [
-  { key: "y", text: "Yes", value: true },
-  { key: "n", text: "No", value: false },
-];
-
 const Register = (props: any) => {
   const [formData, setFormData] = useState<{
     email: string;
     password: string;
     password2: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    position: string;
   }>({
+    firstName: "",
+    lastName: "",
+    position: "",
+    role: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { email, password, password2 } = formData;
+  const { firstName, lastName, position, role, email, password, password2 } =
+    formData;
 
   const onInputChange = (e: { target: { name: any; value: any } }) => {
     setFormData((prevState) => ({
@@ -44,7 +47,15 @@ const Register = (props: any) => {
     if (password !== password2) {
       props.setAlert("Password do not match", "danger");
     } else {
-      await props.register({ email, password });
+      console.log(formData);
+      await props.register({
+        firstName,
+        lastName,
+        role,
+        position,
+        email,
+        password,
+      });
     }
   };
 
@@ -64,36 +75,49 @@ const Register = (props: any) => {
               <Form.Field
                 id="form-input-control-first-name"
                 control={Input}
-                label="First name"
-                placeholder="First name"
-                // name="name"
-                // value={name}
+                label="First Name"
+                type="text"
+                onChange={onInputChange}
+                value={firstName}
+                name="firstName"
               />
               <Form.Field
                 id="form-input-control-last-name"
                 control={Input}
-                label="Last name"
-                placeholder="Last name"
+                label="Last Name"
+                type="text"
+                onChange={onInputChange}
+                value={lastName}
+                name="lastName"
               />
               <Form.Field
-                control={Select}
-                options={managerOptions}
-                label={{
-                  children: "Manager?",
-                  htmlFor: "form-select-control-manager",
-                }}
-                search
-                searchInput={{ id: "form-select-control-manager" }}
+                id="form-input-control-role"
+                control={Input}
+                label="Role"
+                onChange={onInputChange}
+                value={role}
+                name="role"
               />
             </Form.Group>
-            <Form.Field
-              id="form-input-control-email"
-              control={Input}
-              label="Email"
-              onChange={onInputChange}
-              value={email}
-              name="email"
-            />
+            <Form.Group widths="equal">
+              <Form.Field
+                id="form-input-control-email"
+                control={Input}
+                label="Email"
+                onChange={onInputChange}
+                value={email}
+                name="email"
+              />
+              <Form.Field
+                id="form-input-control-position"
+                control={Input}
+                label="Position"
+                onChange={onInputChange}
+                value={position}
+                name="position"
+              />
+            </Form.Group>
+
             <Form.Group widths="equal">
               <Form.Field
                 id="form-input-control-password"

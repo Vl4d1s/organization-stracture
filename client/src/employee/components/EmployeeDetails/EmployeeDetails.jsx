@@ -8,7 +8,6 @@ import ReportModal from "../../../shared/components/UIElements/Modals/ReportModa
 import defaultImage from "../../../assets/defaultImage.png";
 
 const Details = (props) => {
-  const { fistName, lastName, position, manager } = props.employee[0];
   return (
     <React.Fragment>
       <SegmentCard title="Details">
@@ -18,18 +17,15 @@ const Details = (props) => {
               <Image src={defaultImage} size="small" floated="left" />
             </Grid.Column>
             <Grid.Column width={12}>
-              <Header as="h3">Name: {`${fistName} ${lastName}`}</Header>
-              <Header as="h4">Position: {`${position}`}</Header>
+              <Header as="h3">Name: </Header>
+              <Header as="h4">Position:</Header>
               <Social />
               <Divider />
               <Link to="/">
                 <Icon name="user" />
-                Manager: {manager}
+                Manager:
               </Link>
               <ReportModal />
-              {/* <Button floated="right" basic color="blue" content="Blue">
-                Report
-              </Button> */}
             </Grid.Column>
           </Grid.Row>
         </Grid>
