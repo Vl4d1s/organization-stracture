@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../actions/auth";
 
-export interface LoginProps {
-  isAuthenticated: boolean;
-  login: (email: string, password: string) => void;
-}
-
-const Login: React.FC<LoginProps> = ({ login, isAuthenticated }) => {
+const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const dispatch = useDispatch();
+
+  const isAuthenticated: boolean | null = useSelector(
+    //@ts-ignore
+    (state) => state.auth.isAuthenticated
+  );
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login(email, password);
+    dispatch(login(email, password));
   };
 
   if (isAuthenticated) {
@@ -58,8 +59,4 @@ const Login: React.FC<LoginProps> = ({ login, isAuthenticated }) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default Login;

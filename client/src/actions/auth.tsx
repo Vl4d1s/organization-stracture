@@ -10,7 +10,6 @@ import {
   LOGOUT,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
-import { userDetails } from "../employee/pages/EmployeeInfo/EmployeeInfo";
 import { setAlert } from "./alert";
 
 const ipAddress = "http://127.0.0.1:5000";
@@ -32,7 +31,7 @@ export const loadUser = () => async (dispatch: any) => {
   try {
     const res = await axios.get(`${ipAddress}/api/auth/`);
 
-    const payload: userDetails = res.data;
+    const payload = res.data;
 
     dispatch({ type: USER_LOADED, payload });
   } catch (err) {

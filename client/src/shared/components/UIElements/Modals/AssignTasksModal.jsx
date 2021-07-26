@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Button, Modal, Form, TextArea, Input } from "semantic-ui-react";
 
-import { useDispatch } from "react-redux";
-import { addReport } from "../../../../actions/reports";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../../../../actions/tasks";
 
-function ReportModal({ employeeId, managerMail }) {
+function TasksModal({ fullName, employeeMail }) {
   const dispatch = useDispatch();
+  const managerId = useSelector((state) => state.auth.user._id);
 
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -13,7 +14,8 @@ function ReportModal({ employeeId, managerMail }) {
 
   const onSaveHandler = () => {
     setOpen(false);
-    dispatch(addReport({ title, description, employeeId, managerMail }));
+    const dueDate = new Date().toDateString();
+    dispatch(addTask({ title, description, managerId, employeeMail, dueDate }));
   };
 
   return (
@@ -22,28 +24,28 @@ function ReportModal({ employeeId, managerMail }) {
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
-        <Button floated="right" basic color="red">
-          Report
+        <Button floated="right" primary>
+          Assign Task
         </Button>
       }
     >
-      <Modal.Header>Report to:</Modal.Header>
+      <Modal.Header>Assign Task to: {fullName}</Modal.Header>
       <Modal.Content>
         <Modal.Description>
           <Form>
             <Form.Field
-              id="form-input-control-report-title"
+              id="form-input-control-title"
               control={Input}
-              label="Report Title"
+              label="Task Title"
               type="text"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
               name="title"
             />
             <Form.Field
-              id="form-input-control-report-description"
+              id="form-input-control-description"
               control={TextArea}
-              label="Report Description"
+              label="Task Description"
               type="text"
               onChange={(e) => setDescription(e.target.value)}
               value={description}
@@ -64,4 +66,4 @@ function ReportModal({ employeeId, managerMail }) {
   );
 }
 
-export default ReportModal;
+export default TasksModal;

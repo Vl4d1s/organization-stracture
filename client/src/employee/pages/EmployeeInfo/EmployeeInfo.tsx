@@ -1,41 +1,26 @@
 import { Container } from "semantic-ui-react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Details from "../../components/EmployeeDetails/EmployeeDetails";
-import EmployeeTasks from "../../components/EmployeeTasksList/EmployeeTasksList";
-import EmployeeSubordinates from "../../components/EmployeeSubordinates/EmployeeSubordinates";
+import EmployeeTasksList from "../../components/EmployeeTasksList/EmployeeTasksList";
+import SubordinatesList from "../../components/SubordinatesList/SubordinatesList";
 import CenteredLoader from "../../../shared/components/UIElements/Loader/CenteredLoader";
+import ManagerReportsList from "../../components/ManagerReportsList/ManagerReportsList";
+import UserModel from "../../../Models/UserModel";
 
-export interface userDetails {
-  email: string;
-  employee: [];
-  firstName: string;
-  lastName: string;
-  position: string;
-  reports: [];
-  role: string;
-  tasks: [];
-  __v: any;
-  _id: string;
-}
-
-const EmployeeInfo: React.FC<{ userDetails: userDetails }> = ({
-  userDetails,
-}) => {
-  console.log(userDetails);
+const EmployeeInfo = () => {
+  //@ts-ignore
+  const userDetails: UserModel = useSelector((state) => state.auth.user);
   return userDetails ? (
     <Container>
       <Details userDetails={userDetails} />
-      <EmployeeTasks userDetails={userDetails} />
-      {userDetails.role === "manager" && <EmployeeSubordinates />}
+      {userDetails?.role === "employee" && <EmployeeTasksList />}
+      {userDetails?.role === "manager" && <SubordinatesList />}
+      {userDetails?.role === "manager" && <ManagerReportsList />}
     </Container>
   ) : (
     <CenteredLoader />
   );
 };
 
-const mapStateToProps = (state: { auth: { user: any } }) => ({
-  userDetails: state.auth.user,
-});
-
-export default connect(mapStateToProps, {})(EmployeeInfo);
+export default EmployeeInfo;

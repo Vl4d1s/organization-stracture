@@ -120,11 +120,9 @@ const login = async (req, res, next) => {
   }
 
   if (!existingUser) {
-    const error = new HttpError(
-      "Invalid credentials, could not log you in.",
-      403
-    );
-    return next(error);
+    return res.status(400).json({
+      errors: [{ msg: "Invalid Login details. The user not exists" }],
+    });
   }
 
   let isValidPassword = false;
@@ -139,11 +137,9 @@ const login = async (req, res, next) => {
   }
 
   if (!isValidPassword) {
-    const error = new HttpError(
-      "Invalid credentials, could not log you in.",
-      403
-    );
-    return next(error);
+    return res
+      .status(400)
+      .json({ errors: [{ msg: "Invalid Password. Please try again." }] });
   }
 
   let token;
@@ -168,5 +164,78 @@ const login = async (req, res, next) => {
   });
 };
 
+const updateManager = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+  }
+
+  const { managerId, employeeEmail } = req.body;
+
+  let existingEmployee;
+  try {
+    existingEmployee = await User.findOne({ email: employeeEmail });
+  } catch (err) {
+    const error = new HttpError(
+      "Cannot find the employee, could not add the task.",
+      500
+    );
+    return next(error);
+  }
+
+  existingEmployee.manager = managerId;
+
+  try {
+    await existingEmployee.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update place.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(201).json({ managerId });
+};
+
+const updateManagerEmployee = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+  }
+
+  const { managerEmail, employeeId } = req.body;
+
+  let existingManager;
+  try {
+    existingManager = await User.findOne({ email: managerEmail });
+  } catch (err) {
+    const error = new HttpError(
+      "Cannot find the employee, could not add the task.",
+      500
+    );
+    return next(error);
+  }
+  existingManager.employees.push(employeeId);
+
+  try {
+    await existingManager.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update place.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(201).json({ employeeId });
+};
+
 exports.signup = signup;
 exports.login = login;
+exports.updateManager = updateManager;
+exports.updateManagerEmployee = updateManagerEmployee;

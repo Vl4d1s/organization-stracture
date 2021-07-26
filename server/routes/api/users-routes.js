@@ -33,4 +33,28 @@ router.post(
   usersController.login
 );
 
+// @route   POST api/users/manager
+// @desc    Update manager to employee
+// @access  Public
+router.post(
+  "/manager",
+  [
+    check("managerId", "Manager's id is required").not().isEmpty(),
+    check("employeeEmail", "Employee's email is required").not().isEmpty(),
+  ],
+  usersController.updateManager
+);
+
+// @route   POST api/users/employee
+// @desc    Update manager employees
+// @access  Public
+router.post(
+  "/employee",
+  [
+    check("managerEmail", "Manager's email is required").not().isEmpty(),
+    check("employeeId", "Employee's id is required").not().isEmpty(),
+  ],
+  usersController.updateManagerEmployee
+);
+
 module.exports = router;

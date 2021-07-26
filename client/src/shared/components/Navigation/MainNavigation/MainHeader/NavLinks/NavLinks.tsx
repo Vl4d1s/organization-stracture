@@ -5,7 +5,6 @@ import { logout } from "../../../../../../actions/auth";
 import "./NavLinks.css";
 
 const NavLinks: React.FC = (props: any) => {
-  console.log();
   // const authLinks = ();
   // const guestLinks = ();
 

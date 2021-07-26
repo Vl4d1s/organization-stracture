@@ -1,30 +1,32 @@
 import { Container, Card } from "semantic-ui-react";
+import { useSelector } from "react-redux";
 
 import EmployeeItem from "./EmployeeList/EmployeeItem/EmployeeItem";
+import UserModel from "../../../Models/UserModel";
 
-export interface EmployeeData {
-  date: string;
-  fistName: string;
-  lastName: string;
-  description: string;
-  manager: string;
-  position: string;
-  id: string;
-}
+const EmployeesList = (): JSX.Element => {
+  // @ts-ignore
+  const employees = useSelector((state) => state.auth.user.employees);
+  // @ts-ignore
+  const { firstName, lastName } = useSelector((state) => state.auth.user);
+  const managersFullName = `${firstName} ${lastName}`;
 
-const EmployeesList: React.FC<{ employees: EmployeeData[] }> = (
-  props
-): JSX.Element => {
-  const renderedCards: JSX.Element[] = props.employees.map(
-    (employee, index) => {
-      return <EmployeeItem key={index} employee={employee} />;
+  const renderedEmployees: JSX.Element[] = employees.map(
+    (employee: UserModel, index: number) => {
+      return (
+        <EmployeeItem
+          key={index}
+          employee={employee}
+          managersFullName={managersFullName}
+        />
+      );
     }
   );
 
   return (
     <Container>
       <Card.Group doubling itemsPerRow={4} stackable>
-        {renderedCards}
+        {renderedEmployees}
       </Card.Group>
     </Container>
   );

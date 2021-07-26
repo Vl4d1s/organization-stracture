@@ -5,6 +5,8 @@ const connetctDB = require("./config/db");
 const HttpError = require("./models/http-error");
 const usersRoute = require("./routes/api/users-routes");
 const authRoute = require("./routes/api/auth-routes");
+const tasksRoute = require("./routes/api/tasks-routes");
+const reportsRoute = require("./routes/api/reports-routes");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -33,6 +35,8 @@ app.get("/", (req, res) => {
 // Define Routes
 app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/tasks", tasksRoute);
+app.use("/api/reports", reportsRoute);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route", 404);

@@ -11,11 +11,10 @@ const Routes = () => {
     <Switch>
       <Route exact path="/login" render={() => <Login />} />
       <Route path="/register" render={() => <Register />} />
-      {/* <PrivateRoutes  path="/" component={EmployeeInfo} /> */}
       <PrivateRoutes path="/profile" component={EmployeeInfo} />
       <PrivateRoutes path="/employees" component={Employees} />
       <Route path="*">
-        <Redirect to="/profile" />
+        <Redirect to="/" />
       </Route>
     </Switch>
   );

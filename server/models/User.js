@@ -10,8 +10,8 @@ const userSchema = new Schema({
   password: { type: String, required: true, minLength: 6 },
   role: { type: String, required: true },
   position: { type: String, required: true },
-  manager: { type: String },
-  employee: [
+  manager: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  employees: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

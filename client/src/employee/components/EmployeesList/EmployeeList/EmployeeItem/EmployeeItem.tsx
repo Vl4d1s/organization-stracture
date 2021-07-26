@@ -2,43 +2,45 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button, Icon } from "semantic-ui-react";
 
-import { EmployeeData } from "../../EmployeesList";
+import TasksModal from "../../../../../shared/components/UIElements/Modals/TasksModal";
+import UserModel from "../../../../../Models/UserModel";
 
-const extra = (manager: string, id: string) => {
+export interface EmployeeItemProps {
+  employee: UserModel;
+  managersFullName: string;
+}
+
+const extra = (manager: string, tasks: any, firstName: string) => {
   return (
     <React.Fragment>
-      <Link to="/">
+      <Link to="/profile">
         <Icon name="user" />
         Manager: {manager}
       </Link>
-      <Link to={`${id}/details`}>
-        <Button animated floated="right" color="blue">
-          <Button.Content visible>View</Button.Content>
-          <Button.Content hidden>
-            <Icon name="arrow right" />
-          </Button.Content>
-        </Button>
-      </Link>
+      <TasksModal
+        trigger={
+          <Button animated floated="right" color="blue">
+            <Button.Content visible>View</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+        }
+        tasks={tasks}
+        name={firstName}
+      />
     </React.Fragment>
   );
 };
 
-const EmployeeItem: React.FC<{ employee: EmployeeData }> = (props) => {
-  const {
-    fistName,
-    lastName,
-    position,
-    description,
-    manager,
-    id,
-  }: EmployeeData = props.employee;
-
+const EmployeeItem: React.FC<EmployeeItemProps> = (props) => {
+  const { firstName, lastName, position, tasks } = props.employee;
+  console.log(tasks);
   return (
     <Card
-      header={`${fistName} ${lastName}`}
+      header={`${firstName} ${lastName}`}
       meta={position}
-      description={description}
-      extra={extra(manager, id)}
+      extra={extra(props.managersFullName, tasks, firstName)}
     />
   );
 };

@@ -2,7 +2,10 @@ import { List } from "semantic-ui-react";
 import ViewTaskModal from "../../../../shared/components/UIElements/Modals/ViewTaskModal";
 
 const EmployeeTasksItem = (props) => {
-  const { description, dueDate, title } = props.task;
+  const { description, title } = props.report;
+  console.log(props.report);
+  const { firstName: employeeFirstName } = props.report.givenBy;
+
   return (
     <List.Item>
       <List.Content>
@@ -11,7 +14,7 @@ const EmployeeTasksItem = (props) => {
           title={title}
           trigger={<List.Header as="a">{title}</List.Header>}
         />
-        <List.Description>Due: {dueDate}</List.Description>
+        {employeeFirstName}
       </List.Content>
     </List.Item>
   );

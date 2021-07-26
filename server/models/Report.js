@@ -9,7 +9,7 @@ const reportSchema = new Schema({
     required: true,
   },
   title: { type: String, required: true },
-  message: { type: String, required: true },
+  description: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Report", reportSchema);

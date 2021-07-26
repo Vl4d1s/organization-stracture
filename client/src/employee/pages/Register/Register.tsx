@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import {
   Form,
   Input,
@@ -14,7 +14,11 @@ import {
 import { register } from "../../../actions/auth";
 import { setAlert } from "../../../actions/alert";
 
-const Register = (props: any) => {
+const Register = () => {
+  const dispatch = useDispatch();
+  //@ts-ignore
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -37,18 +41,23 @@ const Register = (props: any) => {
 
   const onSubmitHandler = async () => {
     if (password !== password2) {
-      props.setAlert("Password do not match", "danger");
+      dispatch(setAlert("Password do not match"));
     } else {
-      await props.register({
-        firstName,
-        lastName,
-        role,
-        position,
-        email,
-        password,
-      });
+      await dispatch(
+        register({
+          firstName,
+          lastName,
+          role,
+          position,
+          email,
+          password,
+        })
+      );
     }
   };
+  if (isAuthenticated) {
+    return <Redirect to="profile" />;
+  }
 
   return (
     <Grid centered style={{ height: "70vh" }} verticalAlign="middle">
@@ -143,4 +152,4 @@ const Register = (props: any) => {
     </Grid>
   );
 };
-export default connect(null, { register, setAlert })(Register);
+export default Register;

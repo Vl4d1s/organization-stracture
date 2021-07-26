@@ -15,10 +15,7 @@ const initialState = {
   user: null,
 };
 
-const authReducer = (
-  state = initialState,
-  action: { type: string; payload: any }
-) => {
+const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case REGISTER_SUCCESS:

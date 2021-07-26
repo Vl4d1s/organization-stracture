@@ -5,9 +5,6 @@ const jwtSecret = config.get("jwtSecret");
 const HttpError = require("../models/http-error");
 
 module.exports = (req, res, next) => {
-  // if (req.method === "OPTIONS") {
-  //   return next();
-  // }
   try {
     const token = req.header("x-auth-token");
     if (!token) {
