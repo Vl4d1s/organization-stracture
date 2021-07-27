@@ -11,7 +11,6 @@ const ManagerReportsList = () => {
     // @ts-ignore
     (state) => state.auth.user.reports
   );
-  console.log(managerReports);
   return (
     <React.Fragment>
       <SegmentCard title={`My Reports`}>

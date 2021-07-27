@@ -35,7 +35,6 @@ const extra = (manager: string, tasks: any, firstName: string) => {
 
 const EmployeeItem: React.FC<EmployeeItemProps> = (props) => {
   const { firstName, lastName, position, tasks } = props.employee;
-  console.log(tasks);
   return (
     <Card
       header={`${firstName} ${lastName}`}

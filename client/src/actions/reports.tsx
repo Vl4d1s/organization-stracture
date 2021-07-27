@@ -14,7 +14,6 @@ export const addReport =
   ({ title, description, employeeId, managerMail }: IReport) =>
   async (dispatch: any) => {
     const body = { title, description, employeeId, managerMail };
-    console.log(body);
 
     try {
       await axios.post(`${ipAddress}/api/reports`, body);

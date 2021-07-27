@@ -87,7 +87,7 @@ export const login =
 
       dispatch(loadUser());
     } catch (err) {
-      const errors = err.response.data.errors;
+      const errors = err?.response?.data?.errors;
 
       if (errors) {
         errors.forEach((error: { msg: string }) =>

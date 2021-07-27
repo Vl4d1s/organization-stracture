@@ -3,11 +3,11 @@ import ViewTaskModal from "../../../../shared/components/UIElements/Modals/ViewT
 
 const EmployeeTasksItem = (props) => {
   const { description, title } = props.report;
-  console.log(props.report);
   const { firstName: employeeFirstName } = props.report.givenBy;
 
   return (
     <List.Item>
+      <List.Icon name="clipboard outline" verticalAlign="middle" />
       <List.Content>
         <ViewTaskModal
           description={description}

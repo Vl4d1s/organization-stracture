@@ -14,6 +14,8 @@ function ReportModal({ employeeId, managerMail }) {
   const onSaveHandler = () => {
     setOpen(false);
     dispatch(addReport({ title, description, employeeId, managerMail }));
+    setTitle("");
+    setDescription("");
   };
 
   return (
