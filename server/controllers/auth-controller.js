@@ -18,7 +18,6 @@ const getUser = async (req, res, next) => {
       })
       .select("-password");
 
-    console.log("existingUser", existingUser);
     res.json(existingUser);
   } catch (err) {
     const error = new HttpError("Server Error.", 500);
